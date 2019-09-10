@@ -6,7 +6,7 @@ const MovieList = ({ data }) => {
         <div>
             {data ? data.map((movie,i) => (
                 <MovieListItem 
-                name={movie.originalTitle}
+                name={movie.original_title}
                 releaseDate={movie.release_date}
                 rating={movie.vote_average}
                 language={movie.original_language}

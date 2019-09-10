@@ -12,9 +12,19 @@ const MovieListItem = ({name,releaseDate,rating,language,image }) => {
                         </Avatar>
                     }
                     title={name}
-                    subheader={releaseDate}
                 />
-               
+                <CardMedia 
+                    image={`https://image.tmdb.org/t/p/w500/${image}`}
+                    style={{height: 120}}
+                />
+               <CardContent>
+                   <Typography>
+                       {name}
+                   </Typography>
+                   <Typography>
+                       {releaseDate}
+                   </Typography>
+               </CardContent>
             </Card>
         </div>
     )
