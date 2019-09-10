@@ -1,9 +1,9 @@
 import React from 'react'
-import MovieList from 'react'
-const Layout = () => {
+import MovieList from '../MovieList/MovieList'
+const Layout = ({ data }) => {
     return (
         <div>
-            
+            <MovieList data={data} />
         </div>
     )
 }
