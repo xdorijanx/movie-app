@@ -1,13 +1,19 @@
 import React from "react";
 import MovieListItem from "../MovieListItem/MovieListItem";
 import Grid from "@material-ui/core/Grid/";
-const MovieList = ({ data }) => {
+import { withStyles }  from "@material-ui/core/"
+const styles = theme => ({
+  container: {
+    overflow: "hidden"
+  }
+})
+const MovieList = ({ data , classes}) => {
   return (
     <div>
-      <Grid container justify="space-around" alignContent="center">
+      <Grid container justify="space-around" className={classes.container}>
         {data ? (
           data.map((movie, i) => (
-            <Grid key={movie.original_title + i} item>
+            <Grid key={movie.original_title + i} item xs={12} md={6} lg={4}>
               <MovieListItem
                 name={movie.original_title}
                 releaseDate={movie.release_date}
@@ -25,4 +31,4 @@ const MovieList = ({ data }) => {
   );
 };
 
-export default MovieList;
+export default withStyles(styles)(MovieList);

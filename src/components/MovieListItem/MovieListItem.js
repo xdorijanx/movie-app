@@ -15,15 +15,29 @@ import {
 
 const styles = theme => ({
   card: {
-    height: 480,
-    width: 520,
+    maxHeight: 480,
+    maxWidth: 520,
     textAlign: "left",
-    marginBottom: theme.spacing(10)
+    margin: theme.spacing(10) + "px auto", // theme spacing will add 80 to bottom margin
+
+    [theme.breakpoints.down("lg")]: {
+      maxWidth: 420
+    },
+
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 420
+    },
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: 420
+    },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 300
+    }
   },
   cardMedia: {
-    height: 281,
+    height: 220,
     width: "93%",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   cardRoot: {
     overflow: "visible"
@@ -31,9 +45,12 @@ const styles = theme => ({
 
   cardHeader: {
     position: "relative",
-    left: "93%",
+    left: "91%",
     zIndex: 1,
-    bottom: 27,
+    bottom: 36,
+    [theme.breakpoints.down("xs")]: {
+      left: '86%'
+    }
   }
 });
 
@@ -47,15 +64,18 @@ const MovieListItem = ({
 }) => {
   return (
     <Fragment>
-      <Card className={classes.card} classes={{root: classes.cardRoot}}>
+      <Card className={classes.card} classes={{ root: classes.cardRoot }}>
         <CardActionArea>
-          <CardHeader avatar={<Avatar aria-label="recipe">{rating}</Avatar>} className={classes.cardHeader}/>
+          <CardHeader
+            avatar={<Avatar aria-label="recipe">{rating}</Avatar>}
+            className={classes.cardHeader}
+          />
           <CardMedia
             image={`https://image.tmdb.org/t/p/w500/${image}`}
             className={classes.cardMedia}
           />
           <CardContent>
-            <Typography component={'span'}>
+            <Typography component={"span"}>
               <Box fontWeight="fontWeightBold">
                 {name} ( {releaseDate.substring(0, 4)} )
               </Box>
