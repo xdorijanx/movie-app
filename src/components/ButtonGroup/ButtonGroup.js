@@ -13,19 +13,40 @@ const styles = theme => ({
   buttonContainer: {
     display: "flex",
     flexFlow: "row wrap",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    position: "relative"
   },
   loadButton: {
-    borderRadius: "50%"
+    borderRadius: "50%",
+    height: "70px",
+    position: "absolute",
+    left: "50%"
+  },
+  circuralProgress: {
+    position: "absolute",
+    zIndex: 1,
+    width: 70,
+    height: 70,
+    left: "50%"
   }
 });
 
 // The empty span below is used to easily position the rest of the buttons properly
-const ButtonGroup = ({ classes }) => {
+const ButtonGroup = ({ classes, loadMoreMovies, loading }) => {
   return (
     <div className={classes.buttonContainer}>
       <span></span>
-      <Button variant="contained" className={classes.loadButton}>Load</Button>
+      <div>
+        <Button
+          onClick={() => loadMoreMovies()}
+          variant="contained"
+          className={classes.loadButton}
+        >
+          Load
+        </Button>
+        {loading && <CircularProgress size={70} className={classes.circuralProgress} />}
+      </div>
+
       <IconButton>
         <Shuffle fontSize="large" />
       </IconButton>
