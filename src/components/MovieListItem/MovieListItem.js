@@ -17,7 +17,12 @@ const styles = theme => ({
   card: {
     height: 480,
     width: 520,
-    marginBottom: theme.spacing(5)
+    textAlign: "left"
+  },
+  cardMedia: {
+    height: 281,
+    width: "93%",
+    margin: "0 auto"
   }
 });
 
@@ -36,7 +41,7 @@ const MovieListItem = ({
           <CardHeader avatar={<Avatar aria-label="recipe">{rating}</Avatar>} />
           <CardMedia
             image={`https://image.tmdb.org/t/p/w500/${image}`}
-            style={{ height: 281 }}
+            className={classes.cardMedia}
           />
           <CardContent>
             <Typography>

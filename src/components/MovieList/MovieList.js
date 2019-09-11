@@ -4,16 +4,18 @@ import Grid from "@material-ui/core/Grid/";
 const MovieList = ({ data }) => {
   return (
     <div>
-      <Grid xs={12} container justify="space-around" alignContent="center">
+      <Grid container justify="space-around" alignContent="center" spacing={10}>
         {data ? (
           data.map((movie, i) => (
-            <MovieListItem
-              name={movie.original_title}
-              releaseDate={movie.release_date}
-              rating={movie.vote_average}
-              language={movie.original_language}
-              image={movie.backdrop_path}
-            />
+            <Grid item>
+              <MovieListItem
+                name={movie.original_title}
+                releaseDate={movie.release_date}
+                rating={movie.vote_average}
+                language={movie.original_language}
+                image={movie.backdrop_path}
+              />
+            </Grid>
           ))
         ) : (
           <h1>Loading...</h1>
