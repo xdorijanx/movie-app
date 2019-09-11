@@ -4,7 +4,8 @@ export default class MovieContainer extends Component {
   state = {
     moviesData: null,
     loading: true,
-    page: 1
+    page: 1,
+    modalOpen: false,
   };
 
   componentDidMount() {
@@ -48,6 +49,13 @@ export default class MovieContainer extends Component {
       this.fetchMoreMovies(oldMoviesData)
     );
   };
+
+  toggleModal= (bool) =>{
+      debugger;
+      this.setState({
+          modalOpen: bool
+      })
+  }
   render() {
     return (
       <div>
@@ -55,6 +63,8 @@ export default class MovieContainer extends Component {
           data={this.state.moviesData}
           loading={this.state.loading}
           loadMoreMovies={this.loadMoreMovies}
+          toggleModal={this.toggleModal}
+          open={this.state.modalOpen}
         />
       </div>
     );

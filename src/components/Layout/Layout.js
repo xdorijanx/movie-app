@@ -1,11 +1,13 @@
 import React from 'react'
 import MovieList from '../MovieList/MovieList'
 import ButtonGroup from '../../components/ButtonGroup/ButtonGroup'
-const Layout = ({ data, loading,loadMoreMovies}) => {
+import MovieModal from '../../components/MovieModal/MovieModal'
+const Layout = ({ data, loading,loadMoreMovies, toggleModal, open}) => {
     return (
         <div>
             <MovieList data={data} />
-            <ButtonGroup loadMoreMovies={loadMoreMovies} loading={loading}/>
+            <ButtonGroup loadMoreMovies={loadMoreMovies} loading={loading} toggleModal={toggleModal} />
+            <MovieModal open={open} toggleModal={toggleModal} />
         </div>
     )
 }

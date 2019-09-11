@@ -32,7 +32,7 @@ const styles = theme => ({
 });
 
 // The empty span below is used to easily position the rest of the buttons properly
-const ButtonGroup = ({ classes, loadMoreMovies, loading }) => {
+const ButtonGroup = ({ classes, loadMoreMovies, loading, toggleModal }) => {
   return (
     <div className={classes.buttonContainer}>
       <span></span>
@@ -47,7 +47,7 @@ const ButtonGroup = ({ classes, loadMoreMovies, loading }) => {
         {loading && <CircularProgress size={70} className={classes.circuralProgress} />}
       </div>
 
-      <IconButton>
+      <IconButton onClick={() => toggleModal(true)}>
         <Shuffle fontSize="large" />
       </IconButton>
     </div>
