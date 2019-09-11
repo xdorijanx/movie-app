@@ -44,7 +44,7 @@ const MovieListItem = ({
             className={classes.cardMedia}
           />
           <CardContent>
-            <Typography>
+            <Typography component={'span'}>
               <Box fontWeight="fontWeightBold">
                 {name} ( {releaseDate.substring(0, 4)} )
               </Box>

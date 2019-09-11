@@ -7,7 +7,7 @@ const MovieList = ({ data }) => {
       <Grid container justify="space-around" alignContent="center" spacing={10}>
         {data ? (
           data.map((movie, i) => (
-            <Grid item>
+            <Grid key={movie.original_title + i} item>
               <MovieListItem
                 name={movie.original_title}
                 releaseDate={movie.release_date}
