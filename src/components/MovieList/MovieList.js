@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid/";
 const MovieList = ({ data }) => {
   return (
     <div>
-      <Grid container justify="space-around" alignContent="center" spacing={10}>
+      <Grid container justify="space-around" alignContent="center">
         {data ? (
           data.map((movie, i) => (
             <Grid key={movie.original_title + i} item>
