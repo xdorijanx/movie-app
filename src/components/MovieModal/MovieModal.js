@@ -35,12 +35,12 @@ const styles = theme => ({
     width: "100%",
     height: "100%",
     display: "flex",
-    flexFlow: "column wrap"
+    flexFlow: "column nowrap"
   },
   formContainer: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "20%"
+    marginTop: "auto"
   },
 
   rollButton: {
@@ -104,39 +104,15 @@ const MovieModal = ({
                       control={<Radio />}
                       label="Animation"
                     />
-                    <FormControlLabel
-                      value="comedy"
-                      control={<Radio />}
-                      label="Comedy"
-                    />
-
-                    <FormControlLabel
-                      value="crime"
-                      control={<Radio />}
-                      label="Crime"
-                    />
-
-                    <FormControlLabel
-                      value="documentary"
-                      control={<Radio />}
-                      label="Documentary"
-                    />
-
-                    <FormControlLabel
+                      <FormControlLabel
                       value="sci-fi"
                       control={<Radio />}
                       label="Sci-fi"
                     />
-
-                    <FormControlLabel
-                      value="thriller"
-                      control={<Radio />}
-                      label="Thriller"
-                    />
                   </RadioGroup>
                 </FormControl>
               </div>
-              <Button className={classes.rollButton} onClick={searchByGenre}>Roll</Button>
+              <Button className={classes.rollButton} variant="contained" onClick={searchByGenre} color="primary">Roll</Button>
             </div>
           </Paper>
         </Fade>

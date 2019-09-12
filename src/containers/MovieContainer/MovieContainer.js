@@ -85,7 +85,7 @@ export default class MovieContainer extends Component {
         .then(res =>
           this.setState({
             moviesData: oldMoviesData.concat(res.results),
-            loading: false
+            loading: false,
           })
         );
     } else {
@@ -99,7 +99,8 @@ export default class MovieContainer extends Component {
           .then(res =>
             this.setState({
               moviesData: res.results,
-              loading: false
+              loading: false,
+              modalOpen: false
             })
           );
       };

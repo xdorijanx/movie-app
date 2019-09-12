@@ -38,16 +38,17 @@ const ButtonGroup = ({ classes, loadMoreMovies, loading, toggleModal }) => {
       <span></span>
       <div>
         <Button
+          color="primary"
           onClick={() => loadMoreMovies()}
           variant="contained"
           className={classes.loadButton}
         >
           Load
         </Button>
-        {loading && <CircularProgress size={70} className={classes.circuralProgress} />}
+        {loading && <CircularProgress color="secondary" size={70} className={classes.circuralProgress} />}
       </div>
 
-      <IconButton onClick={() => toggleModal(true)}>
+      <IconButton onClick={() => toggleModal(true)} color="primary">
         <Shuffle fontSize="large" />
       </IconButton>
     </div>

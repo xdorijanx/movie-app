@@ -67,7 +67,7 @@ const MovieListItem = ({
       <Card className={classes.card} classes={{ root: classes.cardRoot }}>
         <CardActionArea>
           <CardHeader
-            avatar={<Avatar aria-label="recipe">{rating}</Avatar>}
+            avatar={<Avatar aria-label="rating" style={{backgroundColor: "#3f51b5"}}>{rating}</Avatar>}
             className={classes.cardHeader}
           />
           <CardMedia
