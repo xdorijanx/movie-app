@@ -29,7 +29,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       width: 300,
       heigh: 600
-    },
+    }
   },
   container: {
     width: "100%",
@@ -39,7 +39,7 @@ const styles = theme => ({
   },
   formContainer: {
     display: "flex",
-    justifyContent:"center",
+    justifyContent: "center",
     marginTop: "20%"
   },
 
@@ -48,7 +48,14 @@ const styles = theme => ({
   }
 });
 
-const MovieModal = ({ open, toggleModal, classes }) => {
+const MovieModal = ({
+  open,
+  toggleModal,
+  classes,
+  genre,
+  handleGenreChange,
+  searchByGenre
+}) => {
   return (
     <div>
       <Modal
@@ -75,33 +82,61 @@ const MovieModal = ({ open, toggleModal, classes }) => {
                   component="fieldset"
                   className={classes.formControl}
                 >
-                  <FormLabel component="legend">Gender</FormLabel>
-                  <RadioGroup aria-label="gender" name="gender1">
+                  <FormLabel component="legend">Select Genre</FormLabel>
+                  <RadioGroup
+                    aria-label="genre"
+                    name="genre"
+                    value={genre}
+                    onChange={handleGenreChange}
+                  >
                     <FormControlLabel
-                      value="female"
+                      value="action"
                       control={<Radio />}
-                      label="Female"
+                      label="Action"
                     />
                     <FormControlLabel
-                      value="male"
+                      value="adventure"
                       control={<Radio />}
-                      label="Male"
+                      label="Adventure"
                     />
                     <FormControlLabel
-                      value="other"
+                      value="animation"
                       control={<Radio />}
-                      label="Other"
+                      label="Animation"
                     />
                     <FormControlLabel
-                      value="disabled"
-                      disabled
+                      value="comedy"
                       control={<Radio />}
-                      label="(Disabled option)"
+                      label="Comedy"
+                    />
+
+                    <FormControlLabel
+                      value="crime"
+                      control={<Radio />}
+                      label="Crime"
+                    />
+
+                    <FormControlLabel
+                      value="documentary"
+                      control={<Radio />}
+                      label="Documentary"
+                    />
+
+                    <FormControlLabel
+                      value="sci-fi"
+                      control={<Radio />}
+                      label="Sci-fi"
+                    />
+
+                    <FormControlLabel
+                      value="thriller"
+                      control={<Radio />}
+                      label="Thriller"
                     />
                   </RadioGroup>
                 </FormControl>
               </div>
-              <Button className={classes.rollButton}>Roll</Button>
+              <Button className={classes.rollButton} onClick={searchByGenre}>Roll</Button>
             </div>
           </Paper>
         </Fade>
