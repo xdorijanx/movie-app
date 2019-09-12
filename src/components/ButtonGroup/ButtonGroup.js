@@ -7,14 +7,17 @@ import {
   withStyles
 } from "@material-ui/core";
 
-import Shuffle from "@material-ui/icons/Shuffle";
+import Shuffle from "@material-ui/icons/ShuffleRounded";
 
 const styles = theme => ({
   buttonContainer: {
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "space-around",
-    position: "relative"
+    position: "relative",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "space-between"
+    },
   },
   loadButton: {
     borderRadius: "50%",
@@ -28,6 +31,13 @@ const styles = theme => ({
     width: 70,
     height: 70,
     left: "50%"
+  },
+
+  shuffleButton: {
+    borderRadius: "50%",
+    height: "70px",
+    width: "70px",
+    backgroundColor: theme.palette.primary.main
   }
 });
 
@@ -48,7 +58,7 @@ const ButtonGroup = ({ classes, loadMoreMovies, loading, toggleModal }) => {
         {loading && <CircularProgress color="secondary" size={70} className={classes.circuralProgress} />}
       </div>
 
-      <IconButton onClick={() => toggleModal(true)} color="primary">
+      <IconButton onClick={() => toggleModal(true)} color="secondary" className={classes.shuffleButton} >
         <Shuffle fontSize="large" />
       </IconButton>
     </div>
