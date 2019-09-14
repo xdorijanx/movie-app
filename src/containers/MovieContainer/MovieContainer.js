@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Layout from "../../components/Layout/Layout";
 export default class MovieContainer extends Component {
   state = {
+    id: null,
     moviesData: null,
+    movieDetails: null,
     loading: true,
     page: 1,
     modalOpen: false,
@@ -26,10 +28,22 @@ export default class MovieContainer extends Component {
     )
       .then(res => res.json())
       .then(res =>
-        this.setState({
-          moviesData: res.results,
-          loading: false
-        })
+        this.setState(
+          {
+            moviesData: res.results,
+            loading: false
+          },
+          /*() => {
+            fetch(
+              `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`
+            )
+              .then(res => res.json())
+              .then(res => {
+                this.setState({ id: res.guest_session_id });
+              });
+            }
+            */
+        )
       );
   }
   fetchMoreMovies = oldMoviesData => {
@@ -85,7 +99,7 @@ export default class MovieContainer extends Component {
         .then(res =>
           this.setState({
             moviesData: oldMoviesData.concat(res.results),
-            loading: false,
+            loading: false
           })
         );
     } else {
@@ -118,7 +132,22 @@ export default class MovieContainer extends Component {
     );
   };
 
+  fetchMovieDetails = (movieId) => {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US`)
+      .then(res => res.json())
+      .then(res => this.setState({
+        movieDetails: {
+          name: res.original_title,
+          image: res.backdrop_path,
+          rating: res.vote_average,
+          language: res.original_language,
+          productionCompanies: res.production_companies,
+          overview: res.overview
+        }
+      }))
+  }
   render() {
+    console.log(this.state)
     return (
       <div>
         <Layout
@@ -130,6 +159,8 @@ export default class MovieContainer extends Component {
           toggleModal={this.toggleModal}
           open={this.state.modalOpen}
           searchByGenre={this.searchByGenre}
+          movieDetails={this.state.movieDetails}
+          fetchMovieDetails={this.fetchMovieDetails}
         />
       </div>
     );

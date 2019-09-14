@@ -13,6 +13,8 @@ import {
   withStyles
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
+
 const styles = theme => ({
   card: {
     maxHeight: 480,
@@ -37,7 +39,7 @@ const styles = theme => ({
   cardMedia: {
     height: 220,
     width: "93%",
-    margin: "0 auto",
+    margin: "0 auto"
   },
   cardRoot: {
     overflow: "visible"
@@ -49,8 +51,13 @@ const styles = theme => ({
     zIndex: 1,
     bottom: 36,
     [theme.breakpoints.down("xs")]: {
-      left: '86%'
+      left: "86%"
     }
+  },
+
+  link: {
+    textDecoration: "none",
+    color: "inherit"
   }
 });
 
@@ -60,30 +67,54 @@ const MovieListItem = ({
   rating,
   language,
   image,
-  classes
+  id,
+  classes,
+  fetchMovieDetails
 }) => {
   return (
     <Fragment>
       <Card className={classes.card} classes={{ root: classes.cardRoot }}>
-        <CardActionArea>
-          <CardHeader
-            avatar={<Avatar aria-label="rating" style={{backgroundColor: "#3f51b5"}}>{rating}</Avatar>}
-            className={classes.cardHeader}
-          />
-          <CardMedia
-            image={`https://image.tmdb.org/t/p/w500/${image}`}
-            className={classes.cardMedia}
-          />
-          <CardContent>
-            <Typography component={"span"}>
-              <Box fontWeight="fontWeightBold">
-                {name} ( {releaseDate.substring(0, 4)} )
-              </Box>
-            </Typography>
+        <Link
+          onClick={() => fetchMovieDetails(id)}
+          className={classes.link}
+          to={{
+            pathname: `/${name}`,
+            state: {
+              name: name,
+              image: image,
+              releaseDate: releaseDate,
+              rating: rating,
+              language: language
+            }
+          }}
+        >
+          <CardActionArea>
+            <CardHeader
+              avatar={
+                <Avatar
+                  aria-label="rating"
+                  style={{ backgroundColor: "#3f51b5" }}
+                >
+                  {rating}
+                </Avatar>
+              }
+              className={classes.cardHeader}
+            />
+            <CardMedia
+              image={`https://image.tmdb.org/t/p/w500/${image}`}
+              className={classes.cardMedia}
+            />
+            <CardContent>
+              <Typography component={"span"}>
+                <Box fontWeight="fontWeightBold">
+                  {name} ( {releaseDate.substring(0, 4)} )
+                </Box>
+              </Typography>
 
-            <Typography variant="subtitle1"> Language: {language}</Typography>
-          </CardContent>
-        </CardActionArea>
+              <Typography variant="subtitle1"> Language: {language}</Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
       </Card>
     </Fragment>
   );

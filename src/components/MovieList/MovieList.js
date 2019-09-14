@@ -7,7 +7,7 @@ const styles = theme => ({
     overflow: "hidden"
   }
 })
-const MovieList = ({ data , classes}) => {
+const MovieList = ({ data , classes, fetchMovieDetails}) => {
   return (
     <div>
       <Grid container justify="space-around" className={classes.container}>
@@ -15,11 +15,13 @@ const MovieList = ({ data , classes}) => {
           data.map((movie, i) => (
             <Grid key={movie.original_title + i} item xs={12} md={6} lg={4}>
               <MovieListItem
+                fetchMovieDetails={fetchMovieDetails}
                 name={movie.original_title}
                 releaseDate={movie.release_date}
                 rating={movie.vote_average}
                 language={movie.original_language}
                 image={movie.backdrop_path}
+                id={movie.id}
               />
             </Grid>
           ))
