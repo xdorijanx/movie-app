@@ -1,14 +1,10 @@
 import React from "react";
 import {
-  Paper,
   Typography,
-  Box,
-  Tooltip,
   withStyles,
   Card,
   CardMedia,
   CardContent,
-  CardActionArea
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import humanizeList from "humanize-list";
@@ -21,7 +17,15 @@ const styles = theme => ({
     boxShadow: "none",
     textAlign: "left"
   },
-
+  cardMedia: {
+    height: "80vh",
+    width: "95vw",
+    [theme.breakpoints.down("md")]: {
+      maxHeight: "281px",
+      maxWidth: "500px",
+      margin: "0 auto"
+    }
+  },
   rating_container: {
     display: "flex",
     alignItems: "center",
@@ -32,23 +36,46 @@ const styles = theme => ({
       width: "100vw",
       fontSize: "x-large"
     }
+  },
+  movieTitle: {
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center"
+    }
   }
 });
 
-const MovieDetails = ({ classes, movieDetails,rateMovie,guestSessionId }) => {
-  console.log(movieDetails, "movieDetails");
+const MovieDetails = ({
+  classes,
+  movieDetails,
+  rateMovie,
+  guestSessionId,
+  ratedMovies
+}) => {
+  let value = 0;
+  let userRate = null;
+  if (ratedMovies && movieDetails) {
+    userRate = ratedMovies.filter(
+      ratedMovie => ratedMovie.id === movieDetails.id
+    );
+  }
   return (
     <div>
       {movieDetails !== null ? (
         <Card className={classes.card}>
           <div>
-            <Typography variant="h4" gutterBottom>{movieDetails.name}</Typography>
+            <Typography variant="h4" gutterBottom className={classes.movieTitle}>
+              {movieDetails.name}
+            </Typography>
             <CardMedia
-              image={`https://image.tmdb.org/t/p/original/${movieDetails.image}`}
-              style={{ height: "80vh", width: "95vw" }}
+              className={classes.cardMedia}
+              image={
+                window.innerWidth > 1000
+                  ? `https://image.tmdb.org/t/p/original/${movieDetails.image}`
+                  : `https://image.tmdb.org/t/p/w500/${movieDetails.image}`
+              }
             />
           </div>
-          <CardActionArea></CardActionArea>
+
           <CardContent>
             <div className={classes.rating_container}>
               <Typography>
@@ -61,9 +88,29 @@ const MovieDetails = ({ classes, movieDetails,rateMovie,guestSessionId }) => {
                 max={10}
                 value={movieDetails.rating}
                 precision={0.5}
-                onClick={() => rateMovie(movieDetails.id, guestSessionId, 10)}
+                onChangeActive={(event, newHover) => {
+                  value = newHover;
+                }}
+                onClick={() =>
+                  rateMovie(movieDetails.id, guestSessionId, value)
+                }
               />
             </div>
+            {userRate && userRate.length ? (
+              <div className={classes.rating_container}>
+                <Typography>
+                  <strong>Your rating : </strong>
+                  {userRate[0].rating}
+                </Typography>
+                <Rating
+                  size="medium"
+                  name="hover-tooltip"
+                  max={10}
+                  value={userRate[0].rating}
+                  readOnly
+                />
+              </div>
+            ) : null}
 
             <Typography>
               <strong>Language: </strong>

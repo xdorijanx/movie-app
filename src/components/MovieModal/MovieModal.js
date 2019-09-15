@@ -25,10 +25,10 @@ const styles = theme => ({
 
   paper: {
     width: "30%",
-    height: "80%",
+    height: "50%",
     [theme.breakpoints.down("sm")]: {
       width: 300,
-      heigh: 600
+      height: "70%"
     }
   },
   container: {
@@ -45,6 +45,9 @@ const styles = theme => ({
 
   rollButton: {
     marginTop: "auto"
+  },
+  title: {
+    padding: 6
   }
 });
 
@@ -74,7 +77,7 @@ const MovieModal = ({
           <Paper className={classes.paper} elevation={3}>
             <div className={classes.container}>
               <div>
-                <Typography variant="h4">Movie Roulette</Typography>
+                <Typography variant="h4" className={classes.title}>Movie Roulette</Typography>
               </div>
               <Divider />
               <div className={classes.formContainer}>

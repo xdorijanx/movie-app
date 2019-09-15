@@ -5,6 +5,7 @@ export default class MovieContainer extends Component {
     guestSessionId: null,
     moviesData: null,
     movieDetails: null,
+    ratedMovies: null,
     loading: true,
     page: 1,
     modalOpen: false,
@@ -165,12 +166,24 @@ export default class MovieContainer extends Component {
         }
       }
     ).then(res => res.json())
-    .then(res => console.log(res))
-
-  
+    .then(res => this.fetchRatedMovies(guestSessionId))
+      
   };
+
+  fetchRatedMovies = guestSessionId => {
+   
+    fetch(
+      `https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US&sort_by=created_at.asc`
+    )
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          ratedMovies: res.results
+        })
+      );
+  };
+
   render() {
-    console.log(this.state);
     return (
       <div>
         <Layout
@@ -186,6 +199,7 @@ export default class MovieContainer extends Component {
           fetchMovieDetails={this.fetchMovieDetails}
           rateMovie={this.rateMovie}
           guestSessionId={this.state.guestSessionId}
+          ratedMovies={this.state.ratedMovies}
         />
       </div>
     );

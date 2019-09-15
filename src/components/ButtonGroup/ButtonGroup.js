@@ -3,7 +3,6 @@ import {
   CircularProgress,
   Button,
   IconButton,
-  Typography,
   withStyles
 } from "@material-ui/core";
 

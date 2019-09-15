@@ -3,7 +3,7 @@ import MovieList from "../MovieList/MovieList";
 import ButtonGroup from "../../components/ButtonGroup/ButtonGroup";
 import MovieModal from "../../components/MovieModal/MovieModal";
 import MovieDetails from "../../components/MovieDetails/MovieDetails";
-import { HashRouter, Route, Link, Switch } from "react-router-dom";
+import { HashRouter, Route,  Switch } from "react-router-dom";
 const Layout = ({
   data,
   loading,
@@ -16,7 +16,8 @@ const Layout = ({
   fetchMovieDetails,
   movieDetails,
   rateMovie,
-  guestSessionId
+  guestSessionId,
+  ratedMovies
 }) => {
   return (
     <div>
@@ -44,7 +45,7 @@ const Layout = ({
             )}
           />
 
-          <Route exact path="/:moviename" render={(props) => <MovieDetails {...props}  movieDetails={movieDetails} rateMovie={rateMovie} guestSessionId={guestSessionId}/>} />
+          <Route exact path="/:moviename" render={(props) => <MovieDetails {...props}  movieDetails={movieDetails} rateMovie={rateMovie} guestSessionId={guestSessionId} ratedMovies={ratedMovies}/>} />
             
       
         </Switch>
