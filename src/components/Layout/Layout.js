@@ -14,7 +14,9 @@ const Layout = ({
   handleGenreChange,
   searchByGenre,
   fetchMovieDetails,
-  movieDetails
+  movieDetails,
+  rateMovie,
+  guestSessionId
 }) => {
   return (
     <div>
@@ -42,7 +44,7 @@ const Layout = ({
             )}
           />
 
-          <Route exact path="/:moviename" render={(props) => <MovieDetails {...props}  movieDetails={movieDetails}/>} />
+          <Route exact path="/:moviename" render={(props) => <MovieDetails {...props}  movieDetails={movieDetails} rateMovie={rateMovie} guestSessionId={guestSessionId}/>} />
             
       
         </Switch>

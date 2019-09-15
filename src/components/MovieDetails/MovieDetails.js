@@ -35,7 +35,7 @@ const styles = theme => ({
   }
 });
 
-const MovieDetails = ({ classes, movieDetails }) => {
+const MovieDetails = ({ classes, movieDetails,rateMovie,guestSessionId }) => {
   console.log(movieDetails, "movieDetails");
   return (
     <div>
@@ -61,6 +61,7 @@ const MovieDetails = ({ classes, movieDetails }) => {
                 max={10}
                 value={movieDetails.rating}
                 precision={0.5}
+                onClick={() => rateMovie(movieDetails.id, guestSessionId, 10)}
               />
             </div>
 

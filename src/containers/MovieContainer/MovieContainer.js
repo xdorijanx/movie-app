@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Layout from "../../components/Layout/Layout";
 export default class MovieContainer extends Component {
   state = {
-    id: null,
+    guestSessionId: null,
     moviesData: null,
     movieDetails: null,
     loading: true,
@@ -33,16 +33,16 @@ export default class MovieContainer extends Component {
             moviesData: res.results,
             loading: false
           },
-          /*() => {
+          // creates a guest session id that we then use to rate movies
+          () => {
             fetch(
               `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`
             )
               .then(res => res.json())
               .then(res => {
-                this.setState({ id: res.guest_session_id });
+                this.setState({ guestSessionId: res.guest_session_id });
               });
-            }
-            */
+          }
         )
       );
   }
@@ -132,22 +132,45 @@ export default class MovieContainer extends Component {
     );
   };
 
-  fetchMovieDetails = (movieId) => {
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US`)
+  fetchMovieDetails = movieId => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3&language=en-US`
+    )
       .then(res => res.json())
-      .then(res => this.setState({
-        movieDetails: {
-          name: res.original_title,
-          image: res.backdrop_path,
-          rating: res.vote_average,
-          language: res.original_language,
-          productionCompanies: res.production_companies,
-          overview: res.overview
+      .then(res =>
+        this.setState({
+          movieDetails: {
+            name: res.original_title,
+            image: res.backdrop_path,
+            rating: res.vote_average,
+            language: res.original_language,
+            productionCompanies: res.production_companies,
+            overview: res.overview,
+            id: res.id
+          }
+        })
+      );
+  };
+
+  rateMovie = (movieId, guestSessionId, rating) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/rating?guest_session_id=${guestSessionId}&api_key=f3edabafe1f7ed3f14c3e13e2f3a8ee3`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          value: rating
+        }),
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
         }
-      }))
-  }
+      }
+    ).then(res => res.json())
+    .then(res => console.log(res))
+
+  
+  };
   render() {
-    console.log(this.state)
+    console.log(this.state);
     return (
       <div>
         <Layout
@@ -161,6 +184,8 @@ export default class MovieContainer extends Component {
           searchByGenre={this.searchByGenre}
           movieDetails={this.state.movieDetails}
           fetchMovieDetails={this.fetchMovieDetails}
+          rateMovie={this.rateMovie}
+          guestSessionId={this.state.guestSessionId}
         />
       </div>
     );
