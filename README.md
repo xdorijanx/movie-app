@@ -12,7 +12,7 @@
 ## Install
 
 ```sh
-(npm install)  
+npm install 
 ```
 
 ## Usage
