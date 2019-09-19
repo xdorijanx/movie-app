@@ -5,6 +5,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  GridListTile
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import humanizeList from "humanize-list";
@@ -18,6 +19,10 @@ const styles = theme => ({
     textAlign: "left"
   },
   cardMedia: {
+    display: "flex",
+    flexFlow: "column",
+    justifyContent: "flex-end",
+    textAlign: "left",
     height: "80vh",
     width: "95vw",
     [theme.breakpoints.down("md")]: {
@@ -41,6 +46,14 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       textAlign: "center"
     }
+  },
+  movieSummary: {
+    background: "rgba(0,0,0,0.5)",
+    color: "#fafafa",
+    width: "40%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%"
+    }
   }
 });
 
@@ -51,6 +64,7 @@ const MovieDetails = ({
   guestSessionId,
   ratedMovies
 }) => {
+  console.log(movieDetails);
   let value = 0;
   let userRate = null;
   if (ratedMovies && movieDetails) {
@@ -63,7 +77,11 @@ const MovieDetails = ({
       {movieDetails !== null ? (
         <Card className={classes.card}>
           <div>
-            <Typography variant="h4" gutterBottom className={classes.movieTitle}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              className={classes.movieTitle}
+            >
               {movieDetails.name}
             </Typography>
             <CardMedia
@@ -73,7 +91,13 @@ const MovieDetails = ({
                   ? `https://image.tmdb.org/t/p/original/${movieDetails.image}`
                   : `https://image.tmdb.org/t/p/w500/${movieDetails.image}`
               }
-            />
+            >
+              <div className={classes.movieSummary}>
+                <Typography variant="body1" style={{ padding: "1%" }}>
+                  {movieDetails.overview}
+                </Typography>
+              </div>
+            </CardMedia>
           </div>
 
           <CardContent>
